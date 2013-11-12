@@ -25,7 +25,8 @@ function Update-Version {
     
     # calculate build number unless its already been calculated by another build script run.
     if(-not ($env:BUILD_NUMBER -like '*.*.*.*')) {
-      $script:version = "$($majorAndMinorVersion).$($vcsNumber).$($env:BUILD_NUMBER)"
+      #$script:version = "$($majorAndMinorVersion).$($vcsNumber).$($env:BUILD_NUMBER)"
+      $script:version = "$($majorAndMinorVersion).$($env:BUILD_NUMBER)"
       if($buildTag)
       {
         $script:version += '-' + $buildTag
