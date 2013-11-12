@@ -9,7 +9,7 @@ param(
     [System.Collections.Hashtable] $properties = @{}
 )
 
-$majorAndMinorVersion = '0.1'
+$majorAndMinorVersion = '0.1.0'
 
 $nugetPackageDir = (join-path (split-path $script:MyInvocation.MyCommand.Path) 'NugetPackages')
 
