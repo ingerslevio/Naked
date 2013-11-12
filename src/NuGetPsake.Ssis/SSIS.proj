@@ -1,0 +1,27 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <PropertyGroup>
+    <SSISProjectPath></SSISProjectPath>
+    <Configuration></Configuration>
+
+  </PropertyGroup>
+
+  <UsingTask TaskName="DeploymentFileCompilerTask" AssemblyFile="C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PrivateAssemblies\Microsoft.SqlServer.IntegrationServices.Build.dll" />
+
+  <!-- <UsingTask TaskName="DeploymentFileCompilerTask" AssemblyFile="..\Lib\Microsoft.SqlServer.IntegrationServices.Build.dll">
+  </UsingTask>
+ -->
+  <Target Name="SSISBuild" >
+    <PropertyGroup>
+      <Platform>x86</Platform>
+    </PropertyGroup>
+  
+    <Message Text="Building SSIS project: $(SSISProjectPath) for configuration: $(Configuration)" />
+    <DeploymentFileCompilerTask
+     InputProject="$(SSISProjectPath)"
+     Configuration="$(Configuration)"
+     ProtectionLevel="DontSaveSensitive">
+    </DeploymentFileCompilerTask>
+  </Target>
+
+</Project>

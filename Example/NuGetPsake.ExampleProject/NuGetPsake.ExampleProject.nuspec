@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NuGetPsake.ExampleProject</id>
+    <version>$version$</version>
+    <title>NuGetPsake.ExampleProject</title>
+    <authors>
+    Emil Ingerslev
+    Christian Sparre
+  </authors>
+    <owners></owners>
+    <projectUrl>http://github.com/nugetpsake</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An example project for NuGetPsake</description>
+    <summary></summary>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\*.dll" target="bin" />
+    <file src="Global.asax" />
+    <file src="Web.config" />
+    <file src="Web.*.config" />
+    <file src="Views\*.config" target="Views" />
+    <file src="Views\**\*.cshtml" target="Views" />
+    <file src="App_Data\*.*" target="App_Data" />
+  </files>
+</package>

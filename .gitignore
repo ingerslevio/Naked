@@ -1,0 +1,10 @@
+*.suo
+Example/NuGetPsake.ExampleProject.Tests/obj/
+Example/NuGetPsake.ExampleProject/Client/build/
+Example/NuGetPsake.ExampleProject/bin/
+Example/_TeamCity.NuGetPsake/
+Example/node_modules/
+NugetPackages/
+Example/NuGetPsake.ExampleProject.Tests/bin/
+Example/packages/
+Example/NuGetPsake.ExampleProject/obj/

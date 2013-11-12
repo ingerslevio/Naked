@@ -1,0 +1,35 @@
+<!DOCTYPE>
+<html>
+<head>
+  <% append =  't=' + (new Date().getTime()) %>
+  <title>Jasmine Spec Runner</title>
+  <link rel="stylesheet" type="text/css" href="dep/jasmine.css?<%= append %>">
+
+  <script>__reloadServerUrl="ws://localhost:6001";</script>
+  <script type="text/javascript" src="//localhost:6001/__reload/client.js"></script>
+
+  <script type="text/javascript" src="dep/sinon.js?<%= append %>"></script>
+  <script type="text/javascript" src="dep/jasmine.js?<%= append %>"></script>
+  <script type="text/javascript" src="dep/jasmine-html.js?<%= append %>"></script>
+  <script type="text/javascript" src="dep/jasmine-sinon.js?<%= append %>"></script>
+  <script type="text/javascript" src="tests/JasmineTeamcityReporter.js?<%= append %>"></script>
+  <script type="text/javascript" src="require.js?<%= append %>"></script>
+  <script type="text/javascript">
+    this.appRequireConfig.urlArgs = "<%= append %>"
+    require = this.appRequireConfig
+  </script>
+  <script type="text/javascript" src="dep/require.js?<%= append %>"></script>
+  <script type="text/javascript" src="tests/probo.js?<%= append %>"></script>
+  <script type="text/javascript">
+    probo.initialize({
+      requireConfig: [this.appRequireConfig],
+      preloadModules: ['jquery'],
+      //profile: 'time',
+      //extensions: ['tests/FakeView', 'tests/FakeCentro'],
+      tests: ['tests/SomeTest']
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>

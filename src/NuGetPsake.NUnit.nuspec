@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NuGetPsake.NUnit</id>
+    <version>$version$</version>
+    <title>NuGetPsake</title>
+    <authors>Emil Ingerslev</authors>
+    <owners></owners>
+    <projectUrl>http://github.com/NuGetPsake.NUnit</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An extension for NugetPsake for running NUnit tests</description>
+    <summary></summary>
+    <dependencies>
+      <dependency id="NUnit.Runners" version="2.6.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NuGetPsake.NUnit\**\*" target="tools" />
+  </files>
+</package>

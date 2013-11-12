@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NuGetPsake.MsBuild</id>
+    <version>$version$</version>
+    <title>NuGetPsake</title>
+    <authors>Emil Ingerslev</authors>
+    <owners></owners>
+    <projectUrl>http://github.com/NuGetPsake.MsBuild</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An extension for NugetPsake for running MsBuild tasks</description>
+    <summary></summary>
+  </metadata>
+  <files>
+    <file src="NuGetPsake.MsBuild\**\*" target="tools" />
+  </files>
+</package>

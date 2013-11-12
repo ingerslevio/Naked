@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NuGetPsake.Ssis</id>
+    <version>$version$</version>
+    <title>NuGetPsake</title>
+    <authors>Emil Ingerslev</authors>
+    <owners></owners>
+    <projectUrl>http://github.com/NuGetPsake.Ssis</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An extension for NugetPsake for building Ssis projects</description>
+    <summary></summary>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NuGetPsake.Ssis\**\*" target="tools" />
+  </files>
+</package>

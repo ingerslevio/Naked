@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NuGetPsake</id>
+    <version>$version$</version>
+    <title>NuGetPsake</title>
+    <authors>Emil Ingerslev</authors>
+    <owners></owners>
+    <projectUrl>http://github.com/NuGetPsake</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A shared build script system made for NuGet</description>
+    <summary></summary>
+  </metadata>
+  <files>
+    <file src="NuGetPsake\**\*" target="tools" />
+  </files>
+</package>

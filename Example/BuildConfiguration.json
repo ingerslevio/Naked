@@ -1,0 +1,21 @@
+{
+  "majorAndMinorVersion": "1.0",
+  "ScriptDirectories": [
+    {
+      "Source": "NuGetPsake.ExampleProject\\Client\\src",
+      "Output": "NuGetPsake.ExampleProject\\Client\\build"
+    }
+  ],
+  "NUnitFiles": [
+    "NuGetPsake.ExampleProject.Tests"
+  ],
+  "packages": [
+    "NugetPsake.MSBuild",
+    "NugetPsake.NUnit",
+    "NugetPsake.ExampleModule"
+  ],
+  "Octopus": {
+    "Server": "Hest",
+    "ApiKey": "Test"
+  }
+}
