@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NuGetPsake.Mimosa</id>
+    <version>$version$</version>
+    <title>NuGetPsake.Mimosa</title>
+    <authors>Christian Sparre</authors>
+    <owners></owners>
+    <projectUrl>http://github.com/NuGetPsake.Mimosa</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An extension for NugetPsake for building client scripts with Mimosa</description>
+    <summary></summary>
+  </metadata>
+  <files>
+    <file src="NuGetPsake.Mimosa\**\*" target="tools" />
+  </files>
+</package>

@@ -1,4 +1,4 @@
-# General implementation. Do not change.
+# Updated by NuGetPsake. Do not change.
 param(
     [Parameter(Position=0,Mandatory=0)]
     [string[]]$taskList = @(),
@@ -18,7 +18,7 @@ param(
     [Parameter(Position=7, Mandatory=0)]
     [switch]$help = $false
 )
-.nuget\NuGet.exe restore .nuget\packages.config -source http://teamcity.ennova.com:8080/guestAuth/app/nuget/v1/FeedService.svc/ -OutputDirectory .\packages
-$runScriptPath = (split-path $script:MyInvocation.MyCommand.Path)
-$startPath = (Get-ChildItem (join-path $runScriptPath packages\NugetPsake*\tools\StartNugetPsake.ps1) | Sort LastWriteTime -Descending | Select-Object -First 1).FullName
+$rootDirectory = (split-path $script:MyInvocation.MyCommand.Path)
+& "$rootDirectory\.nuget\NuGet.exe" install "$rootDirectory\.nuget\packages.config" -source http://teamcity.ennova.com:8080/guestAuth/app/nuget/v1/FeedService.svc/ -OutputDirectory .\packages
+$startPath = (Get-ChildItem (join-path $rootDirectory packages\NugetPsake*\tools\StartNugetPsake.ps1) | Sort LastWriteTime -Descending | Select-Object -First 1).FullName
 & $startPath @psBoundParameters

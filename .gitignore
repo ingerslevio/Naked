@@ -8,3 +8,6 @@ NugetPackages/
 Example/NuGetPsake.ExampleProject.Tests/bin/
 Example/packages/
 Example/NuGetPsake.ExampleProject/obj/
+packages/
+Example/NuGetPsake.ExampleProject/.mimosa/
+Example/BuildConfiguration.html

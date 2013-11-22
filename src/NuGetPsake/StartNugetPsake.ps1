@@ -24,7 +24,15 @@ param(
     [switch]$help = $false
 )
 
-$packagePath = (split-path $script:MyInvocation.MyCommand.Path)
+$packagePath = split-path ((Get-Variable MyInvocation -scope 0).Value.MyCommand.Path)
+$rootDirectory = split-path ((Get-Variable MyInvocation -scope 1).Value.MyCommand.Path)
+
+$global:nugetPsake = @{
+    "properties" = @{
+        "packagePath" = $packagePath
+        "rootDirectory" = $rootDirectory
+    } 
+}
 
 # '[p]sake' is the same as 'psake' but $Error is not polluted
 remove-module [p]sake
@@ -35,9 +43,6 @@ if ($help) {
 }
 
 $buildScript = join-path $packagePath 'Bootstrapper.ps1'
-
-$parameters.packagePath = $packagePath
-$properties.packagePath = $packagePath
 
 invoke-psake $buildScript $taskList $framework $docs $parameters $properties $initialization $nologo
 

@@ -332,9 +332,9 @@ function Invoke-psake {
             Cleanup-Environment
             return
         }
-
+        
         Configure-BuildEnvironment
-
+        
         while ($currentContext.includes.Count -gt 0) {
             $includeFilename = $currentContext.includes.Dequeue()
             . $includeFilename

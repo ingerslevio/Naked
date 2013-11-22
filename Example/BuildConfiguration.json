@@ -12,7 +12,8 @@
   "packages": [
     "NugetPsake.MSBuild",
     "NugetPsake.NUnit",
-    "NugetPsake.ExampleModule"
+    "NugetPsake.ExampleModule",
+    "NuGetPsake.Mimosa"
   ],
   "Octopus": {
     "Server": "Hest",

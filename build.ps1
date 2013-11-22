@@ -63,7 +63,7 @@ function Update-Version {
 $descriptions = @{}
 
 $nugetDependencies = 'NUnit.Runners'
-$nugetPackageNames = 'NugetPsake', 'NugetPsake.NUnit','NugetPsake.MsBuild','NugetPsake.Script','NugetPsake.Octopus'
+$nugetPackageNames = 'NugetPsake', 'NugetPsake.NUnit','NugetPsake.MsBuild','NugetPsake.Script','NugetPsake.Octopus','NuGetPsake.Mimosa'
 
 $descriptions['Build'] = "Builds the nuget packages"
 function Build {
