@@ -42,7 +42,7 @@ if ($help) {
   return
 }
 
-$buildScript = join-path $packagePath 'Bootstrapper.ps1'
+$buildScript = join-path $packagePath 'RootBuildScript.ps1'
 
 invoke-psake $buildScript $taskList $framework $docs $parameters $properties $initialization $nologo
 

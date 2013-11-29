@@ -54,7 +54,7 @@ function Update-Version {
   } else {
     Write-Output "Build Script is NOT running on build server"
     $script:isRunningOnBuildServer = $false
-    $tempVersion = [System.DateTime]::Now.ToString("yyyyMMdd.HHmmss")
+    $tempVersion = [System.DateTime]::Now.ToString("ddHHmmss")
     $script:version = "$($majorAndMinorVersion).$tempVersion-local"
   }
   # versioning.ps1 directly included - end
@@ -83,8 +83,6 @@ function Build {
 
 $descriptions['Install'] = "Installs the nuget packages in Examples"
 function Install {
-
-  KillOldOnes
 
   Build
   foreach($nugetDependency in $nugetDependencies) {
@@ -133,13 +131,6 @@ function Help {
           Description = $descriptions[$_]
       }
     } | Format-Table -autosize
-}
-
-function KillOldOnes {
-  try {
-    $global:NuGetPsake_Script_ServerProcess.Kill()
-  } catch {
-  }
 }
 
 Invoke-Expression $task

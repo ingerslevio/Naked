@@ -28,6 +28,69 @@ $nugetPsake.properties.buildConfigurationPath = join-path $nugetPsake.properties
 
 Import-Module (join-path $nugetPsake.properties.nugetPsakePath 'teamcity.psm1') -DisableNameChecking
 
+
+
+function ConvertTo-HashTable($psobject) {
+  $hashtable = @{}
+  foreach($property in $psobject.psobject.properties) {
+    if($property.Value -and ($property.Value.GetType().Name -eq 'PSCustomObject')) {
+      $hashtable[$property.Name] = ConvertTo-HashTable $property.Value
+    } else {
+      $hashtable[$property.Name] = $property.Value
+    }
+  }
+  return $hashtable
+}
+
+function Get-Task([string] $taskName) {
+    return $psake.context.Peek().tasks[$taskName]
+}
+
+function Add-Dependency([string] $taskName, [string[]] $dependencies) {
+    if(-not (Get-Task $taskName)) {
+      throw "Could not add dependency to task. Unknown taskName: '$taskName'"
+    }
+    foreach($dependency in $dependencies) {
+      if(-not (Get-Task $dependency)) {
+        throw "Could not add dependency to task: '$taskName'. Unknown dependency: '$dependency'"
+      }
+      (Get-Task $taskName).dependson += $dependency
+    }
+}
+
+$nugetPsake.procedures = @{}
+
+function Add-NuGetPsakeProcedure($procedure, $name, $scriptBlock) {
+  if(-not $nugetPsake.procedures.$procedure) {
+    $nugetPsake.procedures.$procedure = @()
+  }
+  $nugetPsake.procedures.$procedure + @{
+    ScriptBlock = $scriptBlock
+    Name = $name
+  }  
+}
+
+function Invoke-NuGetPsakeProcedure($procedure) {
+  $possibleProcedures = $nugetPsake.procedures.$procedure
+  foreach($possibleProcedure in $possibleProcedures) {
+    try {
+      $result = . $possibleProcedure.ScriptBlock)
+    } catch {
+      $result = @{
+        Success = $false
+        Error = $Error[0]
+      }
+    }
+    $result.Name = $possibleProcedure.Name
+    if($success) {
+      return $true
+    }
+  }
+}
+
+
+
+
 if(-not (Get-Command "ConvertFrom-Json" -ErrorAction SilentlyContinue)) {
   throw "Powershell 3.0+ is required. Please install Windows Management Framework 3.0 (http://www.microsoft.com/en-us/download/details.aspx?id=34595)"
 } else {
