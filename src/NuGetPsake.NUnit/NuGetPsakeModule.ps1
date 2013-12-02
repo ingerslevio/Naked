@@ -12,7 +12,13 @@ task TestNUnit {
     if(-not $fullTestFileName.endswith('.dll') -and -not $fullTestFileName.endswith('.exe')){
       $fullTestFileName = $testFile + '.dll'
     }
-    $testFilePath = join-path $solutionDir (Get-ChildItem $solutionDir -Name $fullTestFileName -Recurse)[0]
+    
+    # if the testFile name contains \ assume it is a full relative path from the solutionDir
+    if($fullTestFileName.Contains("\")) {
+      $testFilePath = join-path $solutionDir $fullTestFileName
+    } else {
+      $testFilePath = join-path $solutionDir (Get-ChildItem $solutionDir -Name $fullTestFileName -Recurse)[0]
+    }
 
     if($isRunningOnBuildServer){
       & $teamcity['teamcity.dotnet.nunitlauncher'] v4.0 x86 NUnit-2.6.2 $testFilePath
