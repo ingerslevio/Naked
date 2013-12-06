@@ -15,7 +15,7 @@ task Init {
 
 task default -depends Build
 
-Add-NuGetPsakeProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock {
+[void] (Add-NuGetPsakeProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock {
   $majorAndMinorVersion = $buildConfiguration.majorAndMinorVersion
   if(-not $majorAndMinorVersion) {
     throw '$majorAndMinorVersion not set. Insert "majorAndMinorVersion": "1.0" in BuildConfiguration.json'
@@ -44,7 +44,7 @@ Add-NuGetPsakeProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock
     $script:version = "$($script:cleanVersion)-$($script:buildTag)"
   }
   echo "Building version $version"
-}
+})
 
 task GenerateVersionNumber {
   Invoke-NuGetPsakeProcedure GenerateVersionNumber

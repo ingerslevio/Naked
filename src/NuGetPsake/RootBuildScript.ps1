@@ -61,10 +61,11 @@ function Add-Dependency([string] $taskName, [string[]] $dependencies) {
 $nugetPsake.procedures = @{}
 
 function Add-NuGetPsakeProcedure($procedure, $name, $scriptBlock) {
+  write-host $procedure
   if(-not $nugetPsake.procedures.$procedure) {
     $nugetPsake.procedures.$procedure = @()
   }
-  $nugetPsake.procedures.$procedure + @{
+  $nugetPsake.procedures.$procedure += @{
     ScriptBlock = $scriptBlock
     Name = $name
   }  
@@ -72,16 +73,18 @@ function Add-NuGetPsakeProcedure($procedure, $name, $scriptBlock) {
 
 function Invoke-NuGetPsakeProcedure($procedure) {
   $possibleProcedures = $nugetPsake.procedures.$procedure
+  write-output $procedure $possibleProcedures
+
   foreach($possibleProcedure in $possibleProcedures) {
     try {
-      $result = . $possibleProcedure.ScriptBlock)
+      $result = . $possibleProcedure.ScriptBlock
     } catch {
       $result = @{
         Success = $false
         Error = $Error[0]
       }
     }
-    $result.Name = $possibleProcedure.Name
+    Add-Member -Value $result.Name -Type NoteProperty -Name $possibleProcedure.Name
     if($success) {
       return $true
     }
