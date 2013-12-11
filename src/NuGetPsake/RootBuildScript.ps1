@@ -1,34 +1,8 @@
-if($env:TEAMCITY_VERSION) {
-  Write-Output "Build Script is running on build server"
-  $isRunningOnBuildServer = $true
-
-  # load properties from teamcity properties file
-  $teamcityConfigFileContent = [IO.File]::ReadAllText($env:TEAMCITY_BUILD_PROPERTIES_FILE)
-  $teamcity = @{}
-  foreach($line in $teamcityConfigFileContent.split("`n")) {
-    if(-not ($line -like '#*')) {
-      $value = $line.split('=')[1]
-      if($value) {
-        $value = $value.replace("\\","\").replace("\:",":").replace("`r","")
-      }
-      $teamcity.Add($line.split('=')[0],$value)
-    } 
-  }
-
-} else {
-  #Write-Output "Build Script is NOT running on build server"
-  $isRunningOnBuildServer = $false
-}
-
 $nugetPsake.properties.nugetPsakePath = (split-path $script:MyInvocation.MyCommand.Path)
 $nugetPsake.properties.packagesPath = resolve-path (join-path $nugetPsake.properties.nugetPsakePath ..\..\)
 $nugetPsake.properties.solutionFile = (Get-ChildItem $nugetPsake.properties.rootDirectory -Filter '*.sln' -Recurse | Select-Object -First 1).FullName
 $nugetPsake.properties.solutionDir = split-path $nugetPsake.properties.solutionFile
 $nugetPsake.properties.buildConfigurationPath = join-path $nugetPsake.properties.solutionDir buildConfiguration.json
-
-Import-Module (join-path $nugetPsake.properties.nugetPsakePath 'teamcity.psm1') -DisableNameChecking
-
-
 
 function ConvertTo-HashTable($psobject) {
   $hashtable = @{}
@@ -61,7 +35,6 @@ function Add-Dependency([string] $taskName, [string[]] $dependencies) {
 $nugetPsake.procedures = @{}
 
 function Add-NuGetPsakeProcedure($procedure, $name, $scriptBlock) {
-  write-host $procedure
   if(-not $nugetPsake.procedures.$procedure) {
     $nugetPsake.procedures.$procedure = @()
   }
@@ -77,22 +50,25 @@ function Invoke-NuGetPsakeProcedure($procedure) {
 
   foreach($possibleProcedure in $possibleProcedures) {
     try {
-      $result = . $possibleProcedure.ScriptBlock
+      $result = [PSCustomObject] (. $possibleProcedure.ScriptBlock)
     } catch {
-      $result = @{
+      $result = [PSCustomObject] @{
         Success = $false
         Error = $Error[0]
       }
     }
-    Add-Member -Value $result.Name -Type NoteProperty -Name $possibleProcedure.Name
-    if($success) {
-      return $true
+    if(-not (Get-Member -InputObject $result -Name 'Success')) { 
+        [void] (Add-Member -InputObject $result -MemberType NoteProperty -Name 'Success' -Value $true)
+    }
+    if($result.success -eq $true) {
+        return $result
     }
   }
+  return [PSCustomObject] @{
+    Success = $false
+    Error = "No procedures succeded"
+  }
 }
-
-
-
 
 if(-not (Get-Command "ConvertFrom-Json" -ErrorAction SilentlyContinue)) {
   throw "Powershell 3.0+ is required. Please install Windows Management Framework 3.0 (http://www.microsoft.com/en-us/download/details.aspx?id=34595)"
@@ -145,4 +121,36 @@ foreach($packageName in $nugetPsake.buildConfiguration.packages) {
         "$cmdName exists"
     }
   }
+}
+
+Add-NuGetPsakeProcedure -Procedure "DetectBuildServer" -Name "TeamCity" -ScriptBlock {
+    if($env:TEAMCITY_VERSION) {
+      Import-Module (join-path $nugetPsake.properties.nugetPsakePath 'teamcity.psm1') -DisableNameChecking
+      
+      # load properties from teamcity properties file
+      $teamcityConfigFileContent = [IO.File]::ReadAllText($env:TEAMCITY_BUILD_PROPERTIES_FILE)
+      $teamcity = @{}
+      foreach($line in $teamcityConfigFileContent.split("`n")) {
+        if(-not ($line -like '#*')) {
+          $value = $line.split('=')[1]
+          if($value) {
+            $value = $value.replace("\\","\").replace("\:",":").replace("`r","")
+          }
+          $teamcity.Add($line.split('=')[0],$value)
+        } 
+      }
+      $nugetPsake.properties.teamcity = $teamcity
+      return @{ Success = $true }
+    } else {
+      return @{ Success = $false }
+    }
+}
+
+$result = Invoke-NuGetPsakeProcedure "DetectBuildServer"
+
+$nugetPsake.properties.isRunningOnBuildServer = $result.Success
+if($nugetPsake.properties.isRunningOnBuildServer) {
+    Write-Output "Build Script is running on build server"    
+} else {
+    Write-Output "Build Script is NOT running on build server"
 }

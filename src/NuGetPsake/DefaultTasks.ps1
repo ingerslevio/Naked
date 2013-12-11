@@ -47,7 +47,7 @@ task default -depends Build
 })
 
 task GenerateVersionNumber {
-  Invoke-NuGetPsakeProcedure GenerateVersionNumber
+  [void] (Invoke-NuGetPsakeProcedure GenerateVersionNumber)
 }
 
 task PatchAssemblyInfos -depends GenerateVersionNumber {

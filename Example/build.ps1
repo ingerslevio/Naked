@@ -19,6 +19,6 @@ param(
     [switch]$help = $false
 )
 $rootDirectory = (split-path $script:MyInvocation.MyCommand.Path)
-& "$rootDirectory\.nuget\NuGet.exe" install "$rootDirectory\.nuget\packages.config" -source http://teamcity.ennova.com:8080/guestAuth/app/nuget/v1/FeedService.svc/ -OutputDirectory .\packages
+& "$rootDirectory\.nuget\NuGet.exe" install "$rootDirectory\.nuget\packages.config" -OutputDirectory .\packages
 $startPath = (Get-ChildItem (join-path $rootDirectory packages\NugetPsake*\tools\StartNugetPsake.ps1) | Sort LastWriteTime -Descending | Select-Object -First 1).FullName
 & $startPath @psBoundParameters

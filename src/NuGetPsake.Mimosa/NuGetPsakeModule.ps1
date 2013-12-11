@@ -41,6 +41,10 @@ properties {
 }
 
 task InitMimosa {
+    if(-not (Get-Command npm -ErrorAction SilentlyContinue)) { 
+        throw host "npm can't be found on PATH. It seems that you have not installed nodejs. Ensure it is installed and try again." 
+    }
+
     $currentDirectory = Get-Location
     foreach($mimosaConfig in $mimosaConfigs) {
         try {
