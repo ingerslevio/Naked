@@ -1,12 +1,12 @@
 if(-not (Get-Command node -ErrorAction SilentlyContinue)) {
-  throw "node.js must be installed on PATH to use NuGetPsake.Script"
+  throw "node.js must be installed on PATH to use naked.Script"
 }
 
-if(-not $global:NuGetPsake_Script_WatchedDirectories) {
-  $global:NuGetPsake_Script_WatchedDirectories = New-Object System.Collections.ArrayList
+if(-not $global:naked_Script_WatchedDirectories) {
+  $global:naked_Script_WatchedDirectories = New-Object System.Collections.ArrayList
 }
 
-$global:NuGetPsake_Script_Paths = @{}
+$global:naked_Script_Paths = @{}
 
 function script:Watch([string] $path, [string] $destination) {
 
@@ -20,7 +20,7 @@ function script:Watch([string] $path, [string] $destination) {
     ToolsPath = $packages.Script.ToolsPath
   }
 
-  [void] $global:NuGetPsake_Script_WatchedDirectories.Add($path)
+  [void] $global:naked_Script_WatchedDirectories.Add($path)
   foreach($type in @('Created', 'Deleted', 'Changed', 'Error', 'Renamed')) {
     $eventName = "$($path)$($type)"
     [void] (Register-ObjectEvent $fsw $type -SourceIdentifier $eventName -MessageData $messageData -Debug -Action { 
@@ -30,10 +30,10 @@ function script:Watch([string] $path, [string] $destination) {
         $timeStamp = $Event.TimeGenerated 
 
         # Throttle events, because of FileSystemWatcher sometimes publishes multiple events from one change
-        if( ($global:NuGetPsake_Script_Paths[$name]) -and (($timeStamp.Subtract($global:NuGetPsake_Script_Paths[$name])).Seconds -eq 0) ) {
+        if( ($global:naked_Script_Paths[$name]) -and (($timeStamp.Subtract($global:naked_Script_Paths[$name])).Seconds -eq 0) ) {
           return
         }
-        $global:NuGetPsake_Script_Paths[$name] = $timeStamp
+        $global:naked_Script_Paths[$name] = $timeStamp
 
         Write-Host "`r`nThe file '$name' was $changeType at $timeStamp" -fore Green
         # "The file '$name' was $changeType at $timeStamp" >> "c:\workspace\test.txt"
@@ -52,7 +52,7 @@ function script:Watch([string] $path, [string] $destination) {
 }
 
 function script:UnwatchAll {
-  foreach($directory in $global:NuGetPsake_Script_WatchedDirectories.clone()) {
+  foreach($directory in $global:naked_Script_WatchedDirectories.clone()) {
     Unwatch $directory
   }
 }
@@ -62,7 +62,7 @@ function script:Unwatch([string] $path) {
     $event = "$($path)$($type)"
     try {
       Unregister-Event $event
-      [void] $global:NuGetPsake_Script_WatchedDirectories.Remove($path)
+      [void] $global:naked_Script_WatchedDirectories.Remove($path)
     } catch {
     }
   }
@@ -104,12 +104,12 @@ function script:Write-LineByLine($out, $color = $null)
 function script:StartServer() {
 
   try {
-    $global:NuGetPsake_Script_ServerProcess.Kill()
+    $global:naked_Script_ServerProcess.Kill()
   } catch {
   }
 
-  $global:NuGetPsake_Script_ServerProcess = New-Object System.Diagnostics.Process
-  $setup = $global:NuGetPsake_Script_ServerProcess.StartInfo
+  $global:naked_Script_ServerProcess = New-Object System.Diagnostics.Process
+  $setup = $global:naked_Script_ServerProcess.StartInfo
   $setup = New-Object "System.Diagnostics.ProcessStartInfo" 
   $setup.FileName = "node"
   $setup.Arguments = "-e ""require('coffee-script'); require('./server')"""
@@ -119,7 +119,7 @@ function script:StartServer() {
   $setup.RedirectStandardOutput = $true
   $setup.RedirectStandardInput = $false
   # Hook into the standard output and error stream events
-  $errEvent = Register-ObjectEvent -InputObj $global:NuGetPsake_Script_ServerProcess -Event "ErrorDataReceived" `
+  $errEvent = Register-ObjectEvent -InputObj $global:naked_Script_ServerProcess -Event "ErrorDataReceived" `
     -Action {
         param
         (
@@ -128,7 +128,7 @@ function script:StartServer() {
         )
         Write-Host -foreground "DarkRed" $e.Data
     }
-  $outEvent = Register-ObjectEvent -InputObj $global:NuGetPsake_Script_ServerProcess -Event "OutputDataReceived" `
+  $outEvent = Register-ObjectEvent -InputObj $global:naked_Script_ServerProcess -Event "OutputDataReceived" `
     -Action {
         param
         (
@@ -137,11 +137,11 @@ function script:StartServer() {
         )
         Write-Host $e.Data
     }
-  $global:NuGetPsake_Script_ServerProcess.StartInfo = $setup
-  [Void] $global:NuGetPsake_Script_ServerProcess.Start()
+  $global:naked_Script_ServerProcess.StartInfo = $setup
+  [Void] $global:naked_Script_ServerProcess.Start()
 
-  $global:NuGetPsake_Script_ServerProcess.BeginOutputReadLine()
-  $global:NuGetPsake_Script_ServerProcess.BeginErrorReadLine()
+  $global:naked_Script_ServerProcess.BeginOutputReadLine()
+  $global:naked_Script_ServerProcess.BeginErrorReadLine()
 
 
 }

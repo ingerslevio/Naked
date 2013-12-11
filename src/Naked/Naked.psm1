@@ -1,7 +1,7 @@
 $path = (split-path $script:MyInvocation.MyCommand.Path)
 
 function Run-Task($task) {
-    . $path\StartNuGetPsake.ps1 $Task
+    . $path\Startnaked.ps1 $Task
 }
 
 function GetAvailableTasks($context) {

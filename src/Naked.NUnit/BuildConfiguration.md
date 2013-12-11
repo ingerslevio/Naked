@@ -1,6 +1,6 @@
-## NuGetPsake.NUnit
+## naked.NUnit
 
-For using NuGetPsake.NUnit there must be a setting declaring the dll's containing NUnit tests
+For using naked.NUnit there must be a setting declaring the dll's containing NUnit tests
 
 ```json
 {

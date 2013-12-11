@@ -27,7 +27,7 @@ param(
 $packagePath = split-path ((Get-Variable MyInvocation -scope 0).Value.MyCommand.Path)
 $rootDirectory = split-path ((Get-Variable MyInvocation -scope 1).Value.MyCommand.Path)
 
-$global:nugetPsake = @{
+$global:naked = @{
     "properties" = @{
         "packagePath" = $packagePath
         "rootDirectory" = $rootDirectory

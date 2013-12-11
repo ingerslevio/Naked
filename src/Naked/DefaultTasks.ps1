@@ -1,9 +1,9 @@
 properties {
-  $buildConfiguration = $nugetPsake.buildConfiguration
-  foreach ($key in $nugetPsake.properties.keys) {
-    set-item -path "variable:$key" -value $nugetPsake.properties.$key | out-null
+  $buildConfiguration = $naked.buildConfiguration
+  foreach ($key in $naked.properties.keys) {
+    set-item -path "variable:$key" -value $naked.properties.$key | out-null
   }
-  $buildScript = join-path $solutionDir NuGetPsakeModule.ps1
+  $buildScript = join-path $solutionDir nakedModule.ps1
   $hasBuildScript = Test-Path $buildScript
   $nuget = join-path $solutionDir '.nuget/NuGet.exe'
   $nugetPackageDir = join-path $solutionDir 'nugetpackages'
@@ -15,7 +15,7 @@ task Init {
 
 task default -depends Build
 
-[void] (Add-NuGetPsakeProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock {
+[void] (Add-nakedProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock {
   $majorAndMinorVersion = $buildConfiguration.majorAndMinorVersion
   if(-not $majorAndMinorVersion) {
     throw '$majorAndMinorVersion not set. Insert "majorAndMinorVersion": "1.0" in BuildConfiguration.json'
@@ -47,7 +47,7 @@ task default -depends Build
 })
 
 task GenerateVersionNumber {
-  [void] (Invoke-NuGetPsakeProcedure GenerateVersionNumber)
+  [void] (Invoke-nakedProcedure GenerateVersionNumber)
 }
 
 task PatchAssemblyInfos -depends GenerateVersionNumber {

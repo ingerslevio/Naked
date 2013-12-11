@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>NuGetPsake.Script</id>
+    <id>naked.Script</id>
     <version>$version$</version>
-    <title>NuGetPsake</title>
+    <title>naked</title>
     <authors>Emil Ingerslev</authors>
     <owners></owners>
-    <projectUrl>http://github.com/NuGetPsake.Script</projectUrl>
+    <projectUrl>http://github.com/naked.Script</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An extension for NugetPsake for building client files</description>
+    <description>An extension for naked for building client files</description>
     <summary></summary>
     <dependencies>
     </dependencies>
   </metadata>
   <files>
-    <file src="NuGetPsake.Script\**\*" target="tools" />
+    <file src="naked.Script\**\*" target="tools" />
   </files>
 </package>

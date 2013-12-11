@@ -13,7 +13,7 @@ $majorAndMinorVersion = '0.1.0'
 
 $nugetPackageDir = (join-path (split-path $script:MyInvocation.MyCommand.Path) 'NugetPackages')
 
-Import-Module .\src\NuGetPsake\teamcity.psm1 -DisableNameChecking
+Import-Module .\src\naked\teamcity.psm1 -DisableNameChecking
 
 function Update-Version {
   # versioning.ps1 directly included - start
@@ -63,7 +63,7 @@ function Update-Version {
 $descriptions = @{}
 
 $nugetDependencies = 'NUnit.Runners'
-$nugetPackageNames = 'NugetPsake', 'NugetPsake.NUnit','NugetPsake.MsBuild','NugetPsake.Script','NugetPsake.Octopus','NuGetPsake.Mimosa'
+$nugetPackageNames = 'Naked', 'Naked.NUnit','Naked.MsBuild','Naked.Script','Naked.Octopus','Naked.Mimosa'
 
 $descriptions['Build'] = "Builds the nuget packages"
 function Build {
@@ -88,7 +88,7 @@ function Install {
   foreach($nugetDependency in $nugetDependencies) {
     .\Example\.nuget\NuGet.exe install $nugetDependency -OutputDirectory .\Example\packages
   }
-  remove-item .\Example\packages\NugetPsake* -recurse  
+  remove-item .\Example\packages\naked* -recurse  
   foreach($nugetPackageName in $nugetPackageNames) {
     .\Example\.nuget\NuGet.exe install $nugetPackageName -source $nugetPackageDir -Prerelease -OutputDirectory .\Example\packages
   }
@@ -102,7 +102,7 @@ function TestVsInit {
     write-host "!Register-TabExpansion for $taskName" -fore Yellow
   }
 
-  $initScript = (Get-ChildItem .\Example\packages\NugetPsake* -recurse -filter "init.ps1")
+  $initScript = (Get-ChildItem .\Example\packages\naked* -recurse -filter "init.ps1")
   $toolsPath = $initScript.Directory.FullName
   $installPath = $initScript.Directory.Parent.FullName
 
@@ -111,7 +111,7 @@ function TestVsInit {
       -toolsPath $toolsPath
 }
 
-$descriptions['Run'] = "Build NuGetPsake and install and run it in Examples. Supply task for running specific psake task."
+$descriptions['Run'] = "Build naked and install and run it in Examples. Supply task for running specific psake task."
 function Run {
   Install
   .\Example\build.ps1 $psakeTask -properties $properties

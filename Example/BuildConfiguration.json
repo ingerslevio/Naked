@@ -2,18 +2,18 @@
   "majorAndMinorVersion": "1.0",
   "ScriptDirectories": [
     {
-      "Source": "NuGetPsake.ExampleProject\\Client\\src",
-      "Output": "NuGetPsake.ExampleProject\\Client\\build"
+      "Source": "naked.ExampleProject\\Client\\src",
+      "Output": "naked.ExampleProject\\Client\\build"
     }
   ],
   "NUnitFiles": [
-    "NuGetPsake.ExampleProject.Tests"
+    "naked.ExampleProject.Tests"
   ],
   "packages": [
-    "NugetPsake.MSBuild",
-    "NugetPsake.NUnit",
-    "NugetPsake.ExampleModule",
-    "NuGetPsake.Mimosa"
+    "naked.MSBuild",
+    "naked.NUnit",
+    "naked.ExampleModule",
+    "naked.Mimosa"
   ],
   "Octopus": {
     "Server": "Hest",

@@ -1,10 +1,10 @@
 param($installPath, $toolsPath, $package)
 
-if (Get-Module NuGetPsake) {
- Remove-Module NuGetPsake
+if (Get-Module naked) {
+ Remove-Module naked
 }
 
-Import-Module (Join-Path $toolsPath NuGetPsake.psm1) -DisableNameChecking
+Import-Module (Join-Path $toolsPath naked.psm1) -DisableNameChecking
 Set-Settings $installPath $toolsPath $package
 Copy-BuildDefinition
 

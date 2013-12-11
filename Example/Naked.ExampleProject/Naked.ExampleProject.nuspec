@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>NuGetPsake.ExampleProject</id>
+    <id>naked.ExampleProject</id>
     <version>$version$</version>
-    <title>NuGetPsake.ExampleProject</title>
+    <title>naked.ExampleProject</title>
     <authors>
     Emil Ingerslev
     Christian Sparre
   </authors>
     <owners></owners>
-    <projectUrl>http://github.com/nugetpsake</projectUrl>
+    <projectUrl>http://github.com/naked</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An example project for NuGetPsake</description>
+    <description>An example project for naked</description>
     <summary></summary>
     <dependencies>
     </dependencies>

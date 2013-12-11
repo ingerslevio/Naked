@@ -1,6 +1,6 @@
-# NuGetPsake
+# naked
 
-Intial BuildConfiguration.json for NuGetPsake is:
+Intial BuildConfiguration.json for naked is:
 
 ```json
 {
@@ -10,15 +10,15 @@ Intial BuildConfiguration.json for NuGetPsake is:
 }
 ```
 
-NuGetPsake's BuildConfiguration.json is plain JSON and must comple to its rules.
+naked's BuildConfiguration.json is plain JSON and must comple to its rules.
 
-To use addtional NuGetPsake packages you should add them by name to Packages config:
+To use addtional naked packages you should add them by name to Packages config:
 
 ```json
 {
   "Packages": [
-    "NuGetPsake.MsBuild",
-    "NuGetPsake.NUnit"
+    "naked.MsBuild",
+    "naked.NUnit"
   ]
 }
 ```
@@ -31,12 +31,12 @@ For a solution such as '$/Ennova.ExampleProject/Main' it would default to 'Ennov
   "ProjectName": "Ennova.AnotherNameForExampleProject"
 }
 ```
-## NuGetPsake.MsBuild
+## naked.MsBuild
 
 This package adds several msbuild commands for building the solution. It needs no configuration, but its needed to build visual studio solutions.
-## NuGetPsake.NUnit
+## naked.NUnit
 
-For using NuGetPsake.NUnit there must be a setting declaring the dll's containing NUnit tests
+For using naked.NUnit there must be a setting declaring the dll's containing NUnit tests
 
 ```json
 {

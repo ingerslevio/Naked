@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace NuGetPsake.ExampleProject.Tests
+namespace naked.ExampleProject.Tests
 {
     [TestFixture]
     public class MultiplicationTests

@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>NuGetPsake.Mimosa</id>
+    <id>naked.Mimosa</id>
     <version>$version$</version>
-    <title>NuGetPsake.Mimosa</title>
+    <title>naked.Mimosa</title>
     <authors>Christian Sparre</authors>
     <owners></owners>
-    <projectUrl>http://github.com/NuGetPsake.Mimosa</projectUrl>
+    <projectUrl>http://github.com/naked.Mimosa</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An extension for NugetPsake for building client scripts with Mimosa</description>
+    <description>An extension for naked for building client scripts with Mimosa</description>
     <summary></summary>
   </metadata>
   <files>
-    <file src="NuGetPsake.Mimosa\**\*" target="tools" />
+    <file src="naked.Mimosa\**\*" target="tools" />
   </files>
 </package>

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NuGetPsake..ExampleProject.Tests (local)")]
+[assembly: AssemblyTitle("naked..ExampleProject.Tests (local)")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("NuGetPsake..ExampleProject.Tests-1.0.0.0-local")]
+[assembly: AssemblyConfiguration("naked..ExampleProject.Tests-1.0.0.0-local")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NuGetPsake..ExampleProject.Tests (local)")]
+[assembly: AssemblyProduct("naked..ExampleProject.Tests (local)")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

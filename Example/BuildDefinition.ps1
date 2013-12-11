@@ -1,11 +1,11 @@
 Framework "4.0x64"
 
 properties {
-  #$solutionName = 'NugetPsake'
+  #$solutionName = 'naked'
   $majorAndMinorVersion = "1.0"
-  $NUnitFiles = 'NuGetPsake.ExampleProject.Tests'
+  $NUnitFiles = 'naked.ExampleProject.Tests'
 }
 
-#Load-Package 'NugetPsake.MSBuild'
-Load-Package 'NugetPsake.NUnit'
-Load-Package 'NugetPsake.Script'
+#Load-Package 'naked.MSBuild'
+Load-Package 'naked.NUnit'
+Load-Package 'naked.Script'

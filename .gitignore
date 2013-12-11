@@ -1,15 +1,15 @@
 *.suo
-Example/NuGetPsake.ExampleProject.Tests/obj/
-Example/NuGetPsake.ExampleProject/Client/build/
-Example/NuGetPsake.ExampleProject/bin/
-Example/_TeamCity.NuGetPsake/
+Example/naked.ExampleProject.Tests/obj/
+Example/naked.ExampleProject/Client/build/
+Example/naked.ExampleProject/bin/
+Example/_TeamCity.naked/
 Example/node_modules/
 NugetPackages/
-Example/NuGetPsake.ExampleProject.Tests/bin/
+Example/naked.ExampleProject.Tests/bin/
 Example/packages/
-Example/NuGetPsake.ExampleProject/obj/
+Example/naked.ExampleProject/obj/
 packages/
-Example/NuGetPsake.ExampleProject/.mimosa/
+Example/naked.ExampleProject/.mimosa/
 Example/BuildConfiguration.html
 
 Example/Naked.ExampleProject.Tests/bin/

@@ -1,4 +1,4 @@
-# Updated by NuGetPsake. Do not change.
+# Updated by naked. Do not change.
 param(
     [Parameter(Position=0,Mandatory=0)]
     [string[]]$taskList = @(),
@@ -20,5 +20,5 @@ param(
 )
 $rootDirectory = (split-path $script:MyInvocation.MyCommand.Path)
 & "$rootDirectory\.nuget\NuGet.exe" install "$rootDirectory\.nuget\packages.config" -OutputDirectory .\packages
-$startPath = (Get-ChildItem (join-path $rootDirectory packages\NugetPsake*\tools\StartNugetPsake.ps1) | Sort LastWriteTime -Descending | Select-Object -First 1).FullName
+$startPath = (Get-ChildItem (join-path $rootDirectory packages\naked*\tools\Startnaked.ps1) | Sort LastWriteTime -Descending | Select-Object -First 1).FullName
 & $startPath @psBoundParameters

@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>NuGetPsake.Ssis</id>
+    <id>naked.Ssis</id>
     <version>$version$</version>
-    <title>NuGetPsake</title>
+    <title>naked</title>
     <authors>Emil Ingerslev</authors>
     <owners></owners>
-    <projectUrl>http://github.com/NuGetPsake.Ssis</projectUrl>
+    <projectUrl>http://github.com/naked.Ssis</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An extension for NugetPsake for building Ssis projects</description>
+    <description>An extension for naked for building Ssis projects</description>
     <summary></summary>
     <dependencies>
     </dependencies>
   </metadata>
   <files>
-    <file src="NuGetPsake.Ssis\**\*" target="tools" />
+    <file src="naked.Ssis\**\*" target="tools" />
   </files>
 </package>

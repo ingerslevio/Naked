@@ -1,6 +1,6 @@
-# NuGetPsake
+# naked
 
-Intial BuildConfiguration.json for NuGetPsake is:
+Intial BuildConfiguration.json for naked is:
 
 ```json
 {
@@ -10,15 +10,15 @@ Intial BuildConfiguration.json for NuGetPsake is:
 }
 ```
 
-NuGetPsake's BuildConfiguration.json is plain JSON and must comple to its rules.
+naked's BuildConfiguration.json is plain JSON and must comple to its rules.
 
-To use addtional NuGetPsake packages you should add them by name to Packages config:
+To use addtional naked packages you should add them by name to Packages config:
 
 ```json
 {
   "Packages": [
-    "NuGetPsake.MsBuild",
-    "NuGetPsake.NUnit"
+    "naked.MsBuild",
+    "naked.NUnit"
   ]
 }
 ```

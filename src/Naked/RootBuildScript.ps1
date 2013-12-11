@@ -1,8 +1,8 @@
-$nugetPsake.properties.nugetPsakePath = (split-path $script:MyInvocation.MyCommand.Path)
-$nugetPsake.properties.packagesPath = resolve-path (join-path $nugetPsake.properties.nugetPsakePath ..\..\)
-$nugetPsake.properties.solutionFile = (Get-ChildItem $nugetPsake.properties.rootDirectory -Filter '*.sln' -Recurse | Select-Object -First 1).FullName
-$nugetPsake.properties.solutionDir = split-path $nugetPsake.properties.solutionFile
-$nugetPsake.properties.buildConfigurationPath = join-path $nugetPsake.properties.solutionDir buildConfiguration.json
+$naked.properties.nakedPath = (split-path $script:MyInvocation.MyCommand.Path)
+$naked.properties.packagesPath = resolve-path (join-path $naked.properties.nakedPath ..\..\)
+$naked.properties.solutionFile = (Get-ChildItem $naked.properties.rootDirectory -Filter '*.sln' -Recurse | Select-Object -First 1).FullName
+$naked.properties.solutionDir = split-path $naked.properties.solutionFile
+$naked.properties.buildConfigurationPath = join-path $naked.properties.solutionDir buildConfiguration.json
 
 function ConvertTo-HashTable($psobject) {
   $hashtable = @{}
@@ -32,20 +32,20 @@ function Add-Dependency([string] $taskName, [string[]] $dependencies) {
     }
 }
 
-$nugetPsake.procedures = @{}
+$naked.procedures = @{}
 
-function Add-NuGetPsakeProcedure($procedure, $name, $scriptBlock) {
-  if(-not $nugetPsake.procedures.$procedure) {
-    $nugetPsake.procedures.$procedure = @()
+function Add-nakedProcedure($procedure, $name, $scriptBlock) {
+  if(-not $naked.procedures.$procedure) {
+    $naked.procedures.$procedure = @()
   }
-  $nugetPsake.procedures.$procedure += @{
+  $naked.procedures.$procedure += @{
     ScriptBlock = $scriptBlock
     Name = $name
   }  
 }
 
-function Invoke-NuGetPsakeProcedure($procedure) {
-  $possibleProcedures = $nugetPsake.procedures.$procedure
+function Invoke-nakedProcedure($procedure) {
+  $possibleProcedures = $naked.procedures.$procedure
   write-output $procedure $possibleProcedures
 
   foreach($possibleProcedure in $possibleProcedures) {
@@ -73,7 +73,7 @@ function Invoke-NuGetPsakeProcedure($procedure) {
 if(-not (Get-Command "ConvertFrom-Json" -ErrorAction SilentlyContinue)) {
   throw "Powershell 3.0+ is required. Please install Windows Management Framework 3.0 (http://www.microsoft.com/en-us/download/details.aspx?id=34595)"
 } else {
-  $nugetPsake.buildConfiguration = ConvertTo-HashTable (ConvertFrom-Json (Get-Content $nugetPsake.properties.buildConfigurationPath | Out-String))
+  $naked.buildConfiguration = ConvertTo-HashTable (ConvertFrom-Json (Get-Content $naked.properties.buildConfigurationPath | Out-String))
 }
 
 ## Parent Level Shared BuildConfiguration.json
@@ -92,28 +92,28 @@ if($buildConfiguration.framework) {
   Framework "4.0x64"
 }
 
-$nugetPsake.packages = @{}
+$naked.packages = @{}
 
-Include "$($nugetPsake.properties.nugetPsakePath)\DefaultTasks.ps1"
-foreach($packageName in $nugetPsake.buildConfiguration.packages) {
-  $packageSearchPath = join-path $nugetPsake.properties.packagesPath "$packageName*\tools\NuGetPsakeModule.ps1"
-  $nuGetPsakeModuleItem = (Get-ChildItem $packageSearchPath | Sort LastWriteTime -Descending | Select-Object -First 1)
-  if(-not $nuGetPsakeModuleItem) {
-    $nuGetPsakeModuleItem = Get-Item (join-path $nugetPsake.properties.solutionDir "$packageName\NuGetPsakeModule.ps1")
+Include "$($naked.properties.nakedPath)\DefaultTasks.ps1"
+foreach($packageName in $naked.buildConfiguration.packages) {
+  $packageSearchPath = join-path $naked.properties.packagesPath "$packageName*\tools\nakedModule.ps1"
+  $nakedModuleItem = (Get-ChildItem $packageSearchPath | Sort LastWriteTime -Descending | Select-Object -First 1)
+  if(-not $nakedModuleItem) {
+    $nakedModuleItem = Get-Item (join-path $naked.properties.solutionDir "$packageName\nakedModule.ps1")
   }
-  if(-not $nuGetPsakeModuleItem) {
+  if(-not $nakedModuleItem) {
     throw "Could not load package '$packageName'. It does not seem to exist."
   }
 
-  $nugetPsake.packages[$packageName -replace "nugetpsake\.", ""] = @{
+  $naked.packages[$packageName -replace "naked\.", ""] = @{
     Name = $packageName
-    ToolsPath = $nuGetPsakeModuleItem.Directory.FullName
+    ToolsPath = $nakedModuleItem.Directory.FullName
   }
 
   Write-Host "Loading Package $($packageName)" -fore green
-  Include $nuGetPsakeModuleItem.FullName
+  Include $nakedModuleItem.FullName
  
-  if(-not $nuGetPsakeModuleItem)  # I think this should be removed since its not used.
+  if(-not $nakedModuleItem)  # I think this should be removed since its not used.
   {
     $cmdName = "Init-$packageName"
     if (Get-Command $cmdName -errorAction SilentlyContinue)
@@ -123,9 +123,9 @@ foreach($packageName in $nugetPsake.buildConfiguration.packages) {
   }
 }
 
-Add-NuGetPsakeProcedure -Procedure "DetectBuildServer" -Name "TeamCity" -ScriptBlock {
+Add-nakedProcedure -Procedure "DetectBuildServer" -Name "TeamCity" -ScriptBlock {
     if($env:TEAMCITY_VERSION) {
-      Import-Module (join-path $nugetPsake.properties.nugetPsakePath 'teamcity.psm1') -DisableNameChecking
+      Import-Module (join-path $naked.properties.nakedPath 'teamcity.psm1') -DisableNameChecking
       
       # load properties from teamcity properties file
       $teamcityConfigFileContent = [IO.File]::ReadAllText($env:TEAMCITY_BUILD_PROPERTIES_FILE)
@@ -139,17 +139,17 @@ Add-NuGetPsakeProcedure -Procedure "DetectBuildServer" -Name "TeamCity" -ScriptB
           $teamcity.Add($line.split('=')[0],$value)
         } 
       }
-      $nugetPsake.properties.teamcity = $teamcity
+      $naked.properties.teamcity = $teamcity
       return @{ Success = $true }
     } else {
       return @{ Success = $false }
     }
 }
 
-$result = Invoke-NuGetPsakeProcedure "DetectBuildServer"
+$result = Invoke-nakedProcedure "DetectBuildServer"
 
-$nugetPsake.properties.isRunningOnBuildServer = $result.Success
-if($nugetPsake.properties.isRunningOnBuildServer) {
+$naked.properties.isRunningOnBuildServer = $result.Success
+if($naked.properties.isRunningOnBuildServer) {
     Write-Output "Build Script is running on build server"    
 } else {
     Write-Output "Build Script is NOT running on build server"
