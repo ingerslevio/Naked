@@ -7,5 +7,5 @@ properties {
 }
 
 #Load-Package 'NugetPsake.MSBuild'
-#Load-Package 'NugetPsake.NUnit'
+Load-Package 'NugetPsake.NUnit'
 Load-Package 'NugetPsake.Script'

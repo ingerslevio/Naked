@@ -23,6 +23,5 @@
     <file src="Web.*.config" />
     <file src="Views\*.config" target="Views" />
     <file src="Views\**\*.cshtml" target="Views" />
-    <file src="App_Data\*.*" target="App_Data" />
   </files>
 </package>

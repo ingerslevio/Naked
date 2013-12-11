@@ -11,3 +11,10 @@ Example/NuGetPsake.ExampleProject/obj/
 packages/
 Example/NuGetPsake.ExampleProject/.mimosa/
 Example/BuildConfiguration.html
+
+Example/Naked.ExampleProject.Tests/bin/
+Example/Naked.ExampleProject.Tests/obj/
+Example/Naked.ExampleProject/bin/
+Example/Naked.ExampleProject/Client/build/
+Example/Naked.ExampleProject/.mimosa
+Example/Naked.ExampleProject/obj/
