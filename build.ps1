@@ -6,7 +6,10 @@ param(
     [string] $psakeTask = '',
 
     [Parameter(Position=2,Mandatory=0)]
-    [System.Collections.Hashtable] $properties = @{}
+    [System.Collections.Hashtable] $properties = @{},
+
+    [Parameter(Position=3,Mandatory=0)]
+    [string] $example = 'Example'
 )
 
 $majorAndMinorVersion = '0.1.0'
@@ -62,7 +65,6 @@ function Update-Version {
 
 $descriptions = @{}
 
-$nugetDependencies = 'NUnit.Runners'
 $nugetPackageNames = 'Naked', 'Naked.NUnit','Naked.MsBuild','Naked.Script','Naked.Octopus','Naked.Mimosa'
 
 $descriptions['Build'] = "Builds the nuget packages"
@@ -72,7 +74,7 @@ function Build {
     [void] (New-Item -ItemType directory -Path $nugetPackageDir)
   }
   Remove-Item (join-path $nugetPackageDir *.nupkg)
-  foreach($nugetPackageName in $nugetPackageNames) {
+  foreach($nugetPackageName in (get-childitem ./src/*.nuspec | foreach-object { $_.basename })) {
     .\.nuget\NuGet.exe pack .\src\$nugetPackageName.nuspec -version $version -NoPackageAnalysis -OutputDirectory $nugetPackageDir
     $nugetPackageFileName = (Get-ChildItem $nugetPackageDir | Where-Object {$_.Name -match "$nugetPackageName[\d\.\-a-zA-Z]+\.nupkg"}).FullName
     if($isRunningOnBuildServer) {
@@ -83,14 +85,17 @@ function Build {
 
 $descriptions['Install'] = "Installs the nuget packages in Examples"
 function Install {
-
   Build
-  foreach($nugetDependency in $nugetDependencies) {
-    .\Example\.nuget\NuGet.exe install $nugetDependency -OutputDirectory .\Example\packages
+
+  [xml] $packagesConfig = Get-Content ".\$example\.nuget\packages.config"
+  $packages = $packagesConfig.packages.package
+
+  foreach($nugetDependency in ($packages | where { -not $_.version.endsWith("-local") })) {
+    & ".\$example\.nuget\NuGet.exe" install $nugetDependency.id -OutputDirectory .\$example\packages -version $nugetDependency.version
   }
-  remove-item .\Example\packages\naked* -recurse  
-  foreach($nugetPackageName in $nugetPackageNames) {
-    .\Example\.nuget\NuGet.exe install $nugetPackageName -source $nugetPackageDir -Prerelease -OutputDirectory .\Example\packages
+  remove-item .\$example\packages\naked* -recurse  
+  foreach($nugetPackage in ($packages | where { $_.version.endsWith("-local") })) {
+    & ".\$example\.nuget\NuGet.exe" install $nugetPackage.id -source $nugetPackageDir -Prerelease -OutputDirectory .\$example\packages
   }
 }
 
@@ -102,7 +107,7 @@ function TestVsInit {
     write-host "!Register-TabExpansion for $taskName" -fore Yellow
   }
 
-  $initScript = (Get-ChildItem .\Example\packages\naked* -recurse -filter "init.ps1")
+  $initScript = (Get-ChildItem .\$example\packages\naked* -recurse -filter "init.ps1")
   $toolsPath = $initScript.Directory.FullName
   $installPath = $initScript.Directory.Parent.FullName
 
@@ -114,7 +119,7 @@ function TestVsInit {
 $descriptions['Run'] = "Build naked and install and run it in Examples. Supply task for running specific psake task."
 function Run {
   Install
-  .\Example\build.ps1 $psakeTask -properties $properties
+  & ".\$example\build.ps1" $psakeTask -properties $properties
 }
 
 $descriptions['BuildServerRun'] = "The full run to run on the buildserver."
