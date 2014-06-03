@@ -9,10 +9,15 @@ function global:Transform([string] $source, [string] $transformation, [string] $
 }
 
 function global:Run-MsBuild([string] $msbuildFile, [string] $msbuildTask, [string] $verbosity) {  
+  $framework = $psake.context.peek().config.framework
+  $platform = $framework.Substring(3)
+
+  "Building to platform: $($platform)"
+
   if($msbuildTask) {
-    exec { msbuild $msbuildFile /t:$msbuildTask /verbosity:$verbosity }
+    exec { msbuild $msbuildFile /t:$msbuildTask /verbosity:$verbosity /p:"Platform=$($platform)" }
   } else {
-    exec { msbuild $msbuildFile /verbosity:$verbosity }
+    exec { msbuild $msbuildFile /verbosity:$verbosity /p:"Platform=$($platform)" }
   }
 }
 
