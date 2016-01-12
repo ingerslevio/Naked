@@ -1,4 +1,4 @@
-# Updated by naked. Do not change.
+# Updated by Naked. Do not change.
 param(
     [Parameter(Position=0,Mandatory=0)]
     [string[]]$taskList = @(),

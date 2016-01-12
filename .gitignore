@@ -1,15 +1,15 @@
 *.suo
-Example/naked.ExampleProject.Tests/obj/
-Example/naked.ExampleProject/Client/build/
-Example/naked.ExampleProject/bin/
-Example/_TeamCity.naked/
+Example/Naked.ExampleProject.Tests/obj/
+Example/Naked.ExampleProject/Client/build/
+Example/Naked.ExampleProject/bin/
+Example/_TeamCity.Naked/
 Example/node_modules/
 NugetPackages/
-Example/naked.ExampleProject.Tests/bin/
+Example/Naked.ExampleProject.Tests/bin/
 Example/packages/
-Example/naked.ExampleProject/obj/
+Example/Naked.ExampleProject/obj/
 packages/
-Example/naked.ExampleProject/.mimosa/
+Example/Naked.ExampleProject/.mimosa/
 Example/BuildConfiguration.html
 
 Example/Naked.ExampleProject.Tests/bin/

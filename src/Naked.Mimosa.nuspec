@@ -6,12 +6,12 @@
     <title>Naked.Mimosa</title>
     <authors>Christian Sparre</authors>
     <owners></owners>
-    <projectUrl>http://github.com/naked.Mimosa</projectUrl>
+    <projectUrl>http://github.com/ingerslevio/naked</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An extension for naked for building client scripts with Mimosa</description>
+    <description>An extension for Naked for building client scripts with Mimosa</description>
     <summary></summary>
   </metadata>
   <files>
-    <file src="naked.Mimosa\**\*" target="tools" />
+    <file src="Naked.Mimosa\**\*" target="tools" />
   </files>
 </package>

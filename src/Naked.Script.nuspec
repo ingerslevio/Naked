@@ -6,14 +6,14 @@
     <title>Naked.Script</title>
     <authors>Emil Ingerslev</authors>
     <owners></owners>
-    <projectUrl>http://github.com/naked.Script</projectUrl>
+    <projectUrl>http://github.com/ingerslevio/naked</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An extension for naked for building client files</description>
+    <description>An extension for Naked for building client files</description>
     <summary></summary>
     <dependencies>
     </dependencies>
   </metadata>
   <files>
-    <file src="naked.Script\**\*" target="tools" />
+    <file src="Naked.Script\**\*" target="tools" />
   </files>
 </package>

@@ -1,5 +1,5 @@
 if(-not (Get-Command node -ErrorAction SilentlyContinue)) {
-  throw "node.js must be installed on PATH to use naked.Script"
+  throw "node.js must be installed on PATH to use naked.script"
 }
 
 if(-not $global:naked_Script_WatchedDirectories) {

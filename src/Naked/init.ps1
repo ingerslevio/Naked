@@ -1,10 +1,10 @@
 param($installPath, $toolsPath, $package)
 
-if (Get-Module naked) {
- Remove-Module naked
+if (Get-Module Naked) {
+ Remove-Module Naked
 }
 
-Import-Module (Join-Path $toolsPath naked.psm1) -DisableNameChecking
+Import-Module (Join-Path $toolsPath Naked.psm1) -DisableNameChecking
 Set-Settings $installPath $toolsPath $package
 Copy-BuildDefinition
 

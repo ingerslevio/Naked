@@ -1,24 +1,24 @@
-# naked
+# Naked
 
-Intial BuildConfiguration.json for naked is:
+Intial BuildConfiguration.json for Naked is:
 
 ```json
 {
-  "MajorAndMinorVersion": "1.0",
+  "Version": "1.0.0",
   "Framework": "4.0x64",
   "Packages": []
 }
 ```
 
-naked's BuildConfiguration.json is plain JSON and must comple to its rules.
+Naked's BuildConfiguration.json is plain JSON and must comple to its rules.
 
-To use addtional naked packages you should add them by name to Packages config:
+To use addtional Naked packages you should add them by name to Packages config:
 
 ```json
 {
   "Packages": [
-    "naked.MsBuild",
-    "naked.NUnit"
+    "Naked.MsBuild",
+    "Naked.NUnit"
   ]
 }
 ```

@@ -5,5 +5,5 @@ properties {
 }
 
 # Add packages installed
-# Load-Package 'naked.MSBuild'
-# Load-Package 'naked.NUnit'
+# Load-Package 'Naked.MSBuild'
+# Load-Package 'Naked.NUnit'

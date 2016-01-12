@@ -1,19 +1,19 @@
 {
-  "majorAndMinorVersion": "1.0",
+  "Version": "1.0.0",
   "ScriptDirectories": [
     {
-      "Source": "naked.ExampleProject\\Client\\src",
-      "Output": "naked.ExampleProject\\Client\\build"
+      "Source": "Naked.ExampleProject\\Client\\src",
+      "Output": "Naked.ExampleProject\\Client\\build"
     }
   ],
   "NUnitFiles": [
-    "naked.ExampleProject.Tests"
+    "Naked.ExampleProject.Tests"
   ],
   "packages": [
-    "naked.MSBuild",
-    "naked.NUnit",
-    "naked.ExampleModule",
-    "naked.Mimosa"
+    "Naked.MSBuild",
+    "Naked.NUnit",
+    "Naked.ExampleModule",
+    "Naked.Mimosa"
   ],
   "Octopus": {
     "Server": "Hest",

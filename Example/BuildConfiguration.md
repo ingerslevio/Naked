@@ -1,6 +1,6 @@
-# naked
+# Naked
 
-Intial BuildConfiguration.json for naked is:
+Intial BuildConfiguration.json for Naked is:
 
 ```json
 {
@@ -10,15 +10,15 @@ Intial BuildConfiguration.json for naked is:
 }
 ```
 
-naked's BuildConfiguration.json is plain JSON and must comple to its rules.
+Naked's BuildConfiguration.json is plain JSON and must comple to its rules.
 
-To use addtional naked packages you should add them by name to Packages config:
+To use addtional Naked packages you should add them by name to Packages config:
 
 ```json
 {
   "Packages": [
-    "naked.MsBuild",
-    "naked.NUnit"
+    "Naked.MsBuild",
+    "Naked.NUnit"
   ]
 }
 ```
@@ -31,12 +31,12 @@ For a solution such as '$/Ennova.ExampleProject/Main' it would default to 'Ennov
   "ProjectName": "Ennova.AnotherNameForExampleProject"
 }
 ```
-## naked.MsBuild
+## Naked.MsBuild
 
 This package adds several msbuild commands for building the solution. It needs no configuration, but its needed to build visual studio solutions.
-## naked.NUnit
+## Naked.NUnit
 
-For using naked.NUnit there must be a setting declaring the dll's containing NUnit tests
+For using Naked.NUnit there must be a setting declaring the dll's containing NUnit tests
 
 ```json
 {

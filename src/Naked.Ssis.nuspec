@@ -6,14 +6,14 @@
     <title>Naked.Ssis</title>
     <authors>Emil Ingerslev</authors>
     <owners></owners>
-    <projectUrl>http://github.com/naked.Ssis</projectUrl>
+    <projectUrl>http://github.com/ingerslevio/naked</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An extension for naked for building Ssis projects</description>
+    <description>An extension for Naked for building Ssis projects</description>
     <summary></summary>
     <dependencies>
     </dependencies>
   </metadata>
   <files>
-    <file src="naked.Ssis\**\*" target="tools" />
+    <file src="Naked.Ssis\**\*" target="tools" />
   </files>
 </package>

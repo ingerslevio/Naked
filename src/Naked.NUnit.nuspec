@@ -6,9 +6,9 @@
     <title>Naked.NUnit</title>
     <authors>Emil Ingerslev</authors>
     <owners></owners>
-    <projectUrl>http://github.com/naked.NUnit</projectUrl>
+    <projectUrl>http://github.com/ingerslevio/naked.NUnit</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An extension for naked for running NUnit tests</description>
+    <description>An extension for Naked for running NUnit tests</description>
     <summary></summary>
     <dependencies>
       <dependency id="NUnit.Runners" version="2.6.2" />

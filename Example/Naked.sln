@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "naked.ExampleProject", "naked.ExampleProject\naked.ExampleProject.csproj", "{EA55AE6A-4B70-4E4E-A5D1-46C268B32DCB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naked.ExampleProject", "Naked.ExampleProject\Naked.ExampleProject.csproj", "{EA55AE6A-4B70-4E4E-A5D1-46C268B32DCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "naked.ExampleProject.Tests", "naked.ExampleProject.Tests\naked.ExampleProject.Tests.csproj", "{F3804B95-A36E-4BDF-B89B-7B809430EA55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naked.ExampleProject.Tests", "Naked.ExampleProject.Tests\Naked.ExampleProject.Tests.csproj", "{F3804B95-A36E-4BDF-B89B-7B809430EA55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA800523-DDC1-4533-9FA7-A88765EEFA32}"
 	ProjectSection(SolutionItems) = preProject

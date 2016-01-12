@@ -11,6 +11,9 @@ namespace Ennova.BuildScript.ExampleProject.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            
+            string csharp6test = null;
+            var someType = csharp6test?.GetType(); 
 
             return View();
         }

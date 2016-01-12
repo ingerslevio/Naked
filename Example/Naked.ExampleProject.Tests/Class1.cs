@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace naked.ExampleProject.Tests
+namespace Naked.ExampleProject.Tests
 {
     [TestFixture]
     public class MultiplicationTests

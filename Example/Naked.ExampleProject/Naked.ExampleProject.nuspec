@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>naked.ExampleProject</id>
+    <id>Naked.ExampleProject</id>
     <version>$version$</version>
-    <title>naked.ExampleProject</title>
+    <title>Naked.ExampleProject</title>
     <authors>
     Emil Ingerslev
     Christian Sparre
   </authors>
     <owners></owners>
-    <projectUrl>http://github.com/naked</projectUrl>
+    <projectUrl>http://github.com/ingerslevio/naked</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An example project for naked</description>
+    <description>An example project for Naked</description>
     <summary></summary>
     <dependencies>
     </dependencies>

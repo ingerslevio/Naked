@@ -63,7 +63,7 @@ function Invoke-nakedProcedure($procedure) {
     if($result.success -eq $true) {
         return $result
     }
-  }
+  
   return [PSCustomObject] @{
     Success = $false
     Error = "No procedures succeded"
@@ -87,10 +87,12 @@ while($currentDirectory.parent -and (-not $sharedBuildConfigurationPath)) {
 }
 
 if($buildConfiguration.framework) {
-  Framework $buildConfiguration.framework
+  $frameworkVersion = $buildConfiguration.framework
 } else {
-  Framework "4.0x64"
+  $frameworkVersion = "4.6x64"
 }
+Write-output "Using framework $frameworkVersion"
+Framework $frameworkVersion
 
 $naked.packages = @{}
 
@@ -123,7 +125,7 @@ foreach($packageName in $naked.buildConfiguration.packages) {
   }
 }
 
-Add-nakedProcedure -Procedure "DetectBuildServer" -Name "TeamCity" -ScriptBlock {
+Add-NakedProcedure -Procedure "DetectBuildServer" -Name "TeamCity" -ScriptBlock {
     if($env:TEAMCITY_VERSION) {
       Import-Module (join-path $naked.properties.nakedPath 'teamcity.psm1') -DisableNameChecking
       
@@ -146,7 +148,7 @@ Add-nakedProcedure -Procedure "DetectBuildServer" -Name "TeamCity" -ScriptBlock 
     }
 }
 
-$result = Invoke-nakedProcedure "DetectBuildServer"
+$result = Invoke-NakedProcedure "DetectBuildServer"
 
 $naked.properties.isRunningOnBuildServer = $result.Success
 if($naked.properties.isRunningOnBuildServer) {

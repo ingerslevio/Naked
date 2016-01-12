@@ -15,10 +15,10 @@ task Init {
 
 task default -depends Build
 
-[void] (Add-nakedProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock {
-  $majorAndMinorVersion = $buildConfiguration.majorAndMinorVersion
-  if(-not $majorAndMinorVersion) {
-    throw '$majorAndMinorVersion not set. Insert "majorAndMinorVersion": "1.0" in BuildConfiguration.json'
+[void] (Add-NakedProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock {
+  $version = $buildConfiguration.version
+  if(-not $version) {
+    throw '$version not set. Insert "version": "1.0.0" in BuildConfiguration.json'
   }
 
   if($isRunningOnBuildServer) {
@@ -27,7 +27,7 @@ task default -depends Build
     
     # calculate build number unless its already been calculated by another build script run.
     if(-not ($env:BUILD_NUMBER -like '*.*.*.*')) {
-      $script:cleanVersion = "$($majorAndMinorVersion).$($vcsNumber).$($env:BUILD_NUMBER)"
+      $script:cleanVersion = "$($version).$($env:BUILD_NUMBER)"
       $script:version = $script:cleanVersion
       if($script:buildTag)
       {
@@ -40,14 +40,14 @@ task default -depends Build
     Teamcity-SetBuildNumber $script:version
   } else {
     $script:buildTag = "local"
-    $script:cleanVersion = "$($majorAndMinorVersion).0.0"
+    $script:cleanVersion = "$($version).0"
     $script:version = "$($script:cleanVersion)-$($script:buildTag)"
   }
   echo "Building version $version"
 })
 
 task GenerateVersionNumber {
-  [void] (Invoke-nakedProcedure GenerateVersionNumber)
+  [void] (Invoke-NakedProcedure GenerateVersionNumber)
 }
 
 task PatchAssemblyInfos -depends GenerateVersionNumber {
