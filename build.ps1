@@ -15,7 +15,7 @@ param(
     [string] $buildVersion = 'auto'
 )
 
-$version = '0.2.0'
+$version = '0.2.1'
 
 $nugetPackageDir = (join-path (split-path $script:MyInvocation.MyCommand.Path) 'NugetPackages')
 
