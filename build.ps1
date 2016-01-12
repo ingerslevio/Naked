@@ -15,7 +15,7 @@ param(
     [string] $buildVersion = 'auto'
 )
 
-$version = '0.2.1'
+$version = '0.2.2'
 
 $nugetPackageDir = (join-path (split-path $script:MyInvocation.MyCommand.Path) 'NugetPackages')
 
@@ -90,7 +90,7 @@ function Build {
   }
   Remove-Item (join-path $nugetPackageDir *.nupkg)
   foreach($nugetPackageName in (get-childitem ./src/*.nuspec | foreach-object { $_.basename })) {
-    .\.nuget\NuGet.exe pack .\src\$nugetPackageName.nuspec -version $version -NoPackageAnalysis -OutputDirectory $nugetPackageDir
+    .\.nuget\NuGet.exe pack .\src\$nugetPackageName.nuspec -version $generatedVersion -NoPackageAnalysis -OutputDirectory $nugetPackageDir
     $nugetPackageFileName = (Get-ChildItem $nugetPackageDir | Where-Object {$_.Name -match "$nugetPackageName[\d\.\-a-zA-Z]+\.nupkg"}).FullName
     if($isRunningOnBuildServer) {
       TeamCity-PublishArtifact $nugetPackageFileName

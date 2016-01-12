@@ -15,7 +15,7 @@ task Init {
 
 task default -depends Build
 
-[void] (Add-NakedProcedure -Procedure GenerateVersionNumber -Name Test -ScriptBlock {
+[void] (Add-NakedProcedure -Procedure "GenerateVersionNumber" -Name Test -ScriptBlock {
   $version = $buildConfiguration.version
   if(-not $version) {
     throw '$version not set. Insert "version": "1.0.0" in BuildConfiguration.json'
@@ -43,11 +43,11 @@ task default -depends Build
     $script:cleanVersion = "$($version).0"
     $script:version = "$($script:cleanVersion)-$($script:buildTag)"
   }
-  Write-Host "Building version $version"
+  echo "Building version $version"
 })
 
 task GenerateVersionNumber {
-  [void] (Invoke-NakedProcedure GenerateVersionNumber)
+  [void] (Invoke-NakedProcedure "GenerateVersionNumber")
 }
 
 task PatchAssemblyInfos -depends GenerateVersionNumber {

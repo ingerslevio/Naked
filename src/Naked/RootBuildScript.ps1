@@ -34,7 +34,7 @@ function Add-Dependency([string] $taskName, [string[]] $dependencies) {
 
 $naked.procedures = @{}
 
-function Add-nakedProcedure($procedure, $name, $scriptBlock) {
+function Add-NakedProcedure($procedure, $name, $scriptBlock) {
   if(-not $naked.procedures.$procedure) {
     $naked.procedures.$procedure = @()
   }
@@ -44,9 +44,8 @@ function Add-nakedProcedure($procedure, $name, $scriptBlock) {
   }  
 }
 
-function Invoke-nakedProcedure($procedure) {
+function Invoke-NakedProcedure($procedure) {
   $possibleProcedures = $naked.procedures.$procedure
-  write-output $procedure $possibleProcedures
 
   foreach($possibleProcedure in $possibleProcedures) {
     try {
@@ -57,12 +56,14 @@ function Invoke-nakedProcedure($procedure) {
         Error = $Error[0]
       }
     }
+    Write-Host "$procedure $result"
     if(-not (Get-Member -InputObject $result -Name 'Success')) { 
         [void] (Add-Member -InputObject $result -MemberType NoteProperty -Name 'Success' -Value $true)
     }
     if($result.success -eq $true) {
         return $result
     }
+  }
   
   return [PSCustomObject] @{
     Success = $false
