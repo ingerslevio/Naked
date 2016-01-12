@@ -43,7 +43,7 @@ task default -depends Build
     $script:cleanVersion = "$($version).0"
     $script:version = "$($script:cleanVersion)-$($script:buildTag)"
   }
-  echo "Building version $version"
+  Write-Host "Building version $version"
 })
 
 task GenerateVersionNumber {
