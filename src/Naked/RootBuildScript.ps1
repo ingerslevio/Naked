@@ -96,16 +96,16 @@ $naked.packages = @{}
 
 Include "$($naked.properties.nakedPath)\DefaultTasks.ps1"
 foreach($packageName in $naked.buildConfiguration.packages) {
-  $packageSearchPath = join-path $naked.properties.packagesPath "$packageName*\tools\nakedModule.ps1"
+  $packageSearchPath = join-path $naked.properties.packagesPath "$packageName*\tools\NakedModule.ps1"
   $nakedModuleItem = (Get-ChildItem $packageSearchPath | Sort LastWriteTime -Descending | Select-Object -First 1)
   if(-not $nakedModuleItem) {
-    $nakedModuleItem = Get-Item (join-path $naked.properties.solutionDir "$packageName\nakedModule.ps1")
+    $nakedModuleItem = Get-Item (join-path $naked.properties.solutionDir "$packageName\NakedModule.ps1")
   }
   if(-not $nakedModuleItem) {
     throw "Could not load package '$packageName'. It does not seem to exist."
   }
 
-  $naked.packages[$packageName -replace "naked\.", ""] = @{
+  $naked.packages[$packageName -replace "Naked\.", ""] = @{
     Name = $packageName
     ToolsPath = $nakedModuleItem.Directory.FullName
   }

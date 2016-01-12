@@ -20,5 +20,5 @@ param(
 )
 $rootDirectory = (split-path $script:MyInvocation.MyCommand.Path)
 & "$rootDirectory\.nuget\NuGet.exe" install "$rootDirectory\.nuget\packages.config" -OutputDirectory .\packages
-$startPath = (Get-ChildItem (join-path $rootDirectory packages\naked*\tools\Startnaked.ps1) | Sort LastWriteTime -Descending | Select-Object -First 1).FullName
+$startPath = (Get-ChildItem (join-path $rootDirectory packages\Naked*\tools\StartNaked.ps1) | Sort LastWriteTime -Descending | Select-Object -First 1).FullName
 & $startPath @psBoundParameters

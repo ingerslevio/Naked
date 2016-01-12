@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>naked.Mimosa</id>
+    <id>Naked.Mimosa</id>
     <version>$version$</version>
-    <title>naked.Mimosa</title>
+    <title>Naked.Mimosa</title>
     <authors>Christian Sparre</authors>
     <owners></owners>
     <projectUrl>http://github.com/naked.Mimosa</projectUrl>

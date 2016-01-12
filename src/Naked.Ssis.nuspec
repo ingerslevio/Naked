@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>naked.Ssis</id>
+    <id>Naked.Ssis</id>
     <version>$version$</version>
-    <title>naked</title>
+    <title>Naked.Ssis</title>
     <authors>Emil Ingerslev</authors>
     <owners></owners>
     <projectUrl>http://github.com/naked.Ssis</projectUrl>

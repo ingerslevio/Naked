@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>naked.NUnit</id>
+    <id>Naked.NUnit</id>
     <version>$version$</version>
-    <title>naked</title>
+    <title>Naked.NUnit</title>
     <authors>Emil Ingerslev</authors>
     <owners></owners>
     <projectUrl>http://github.com/naked.NUnit</projectUrl>
@@ -15,6 +15,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="naked.NUnit\**\*" target="tools" />
+    <file src="Naked.NUnit\**\*" target="tools" />
   </files>
 </package>
