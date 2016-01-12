@@ -5,7 +5,7 @@ Intial BuildConfiguration.json for Naked is:
 ```json
 {
   "Version": "1.0.0",
-  "Framework": "4.0x64",
+  "Framework": "4.6x64",
   "Packages": []
 }
 ```
